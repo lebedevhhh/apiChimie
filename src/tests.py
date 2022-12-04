@@ -11,16 +11,16 @@ import json
 #             charges = args["charges"]
 # )
 
-url = "http://127.0.0.1:5000/atome/28" #<int:numprotons>
+url = "http://127.0.0.1:5000/atome/46" ##<int:numprotons>
 
 dt = {
-    'name' :"Cobalt",
+    'name' :"Palladium",
     'val_e': 9,
-    'e_negativity': 1.88,
-    'Masse_Molaire': 55.85,
-    'config_e_quick': "[Ar] 4(s2) 3(d7)",
-    'config_e_full': "1(s2) 2(s2) 2(p6) 3(s2) 3(p6) 4(s2) 3(d7)",
-    'charges': "(+2, +3)"
+    'e_negativity': 2.20,
+    'Masse_Molaire': 102.9,
+    'config_e_quick': "[Ar] 4(s2) 3(d10) 4(s2) 4(p6) 5(s1) 4(d8)",
+    'config_e_full': "1(s2) 2(s2) 2(p6) 3(s2) 3(p6) 4(s2) 3(d10) 4(s2) 4(p6) 5(s1) 4(d8)",
+    'charges': "(+2, +3, +4)"
 }
 
 
@@ -30,4 +30,5 @@ print(resp.status_code)
 ##
 ##need to change the carone full config and also quick config
 ##revoir vanadium config
-#### rendu Nickel
+#### rendu Palladium
+#### revoir le bay du zinc
