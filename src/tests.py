@@ -11,16 +11,16 @@ import json
 #             charges = args["charges"]
 # )
 
-url = "http://127.0.0.1:5000/atome/46" ##<int:numprotons>
+url = "http://127.0.0.1:5000/atome/55" ##<int:numprotons>
 
 dt = {
-    'name' :"Palladium",
-    'val_e': 9,
-    'e_negativity': 2.20,
-    'Masse_Molaire': 102.9,
-    'config_e_quick': "[Ar] 4(s2) 3(d10) 4(s2) 4(p6) 5(s1) 4(d8)",
-    'config_e_full': "1(s2) 2(s2) 2(p6) 3(s2) 3(p6) 4(s2) 3(d10) 4(s2) 4(p6) 5(s1) 4(d8)",
-    'charges': "(+2, +3, +4)"
+    'name' :"Cesium",
+    'val_e': 1,
+    'e_negativity': 0.79,
+    'Masse_Molaire': 132.9,
+    'config_e_quick': "[Xe] 6(s1)",
+    'config_e_full': "1(s2) 2(s2) 2(p6) 3(s2) 3(p6) 4(s2) 3(d10) 4(s2) 4(p6) 5(s2) 4(d10) 5(p6) 6(s1)",
+    'charges': "(+1)"
 }
 
 
@@ -32,3 +32,4 @@ print(resp.status_code)
 ##revoir vanadium config
 #### rendu Palladium
 #### revoir le bay du zinc
+##revoir le Palladium
