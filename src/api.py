@@ -45,7 +45,7 @@ atome_put_args.add_argument(
     "val_e", type = int, help = "Electron de valence of the atome is required", required = True
 )
 atome_put_args.add_argument(
-    "e_negativity", type = float, help = "electro-negativity of the atome is required", required = True
+    "e_negativity", type = float, help = "electro-negativity of the atome is required", required = False
 )
 atome_put_args.add_argument(
     "Masse_Molaire", type = float, help = "Masse Molaires of the atome is required", required = True
@@ -63,25 +63,25 @@ atome_put_args.add_argument(
 ###for the update HTTP method
 atome_update_args = reqparse.RequestParser()
 atome_update_args.add_argument(
-    "name", type = str, help = "Name of the atome is required", required = True
+    "name", type = str, help = "Name of the atome is required", required = False
 )
 atome_update_args.add_argument(
-    "val_e", type = int, help = "Electron de valence of the atome is required", required = True
+    "val_e", type = int, help = "Electron de valence of the atome is required", required = False
 )
 atome_update_args.add_argument(
-    "e_negativity", type = float, help = "electro-negativity of the atome is required", required = True
+    "e_negativity", type = float, help = "electro-negativity of the atome is required", required = False
 )
 atome_update_args.add_argument(
-    "Masse_Molaire", type = float, help = "Masse Molaires of the atome is required", required = True
+    "Masse_Molaire", type = float, help = "Masse Molaires of the atome is required", required = False
 )
 atome_update_args.add_argument(
-    "config_e_quick", type = str, help = "configuration electro. abgreger of the atome is required", required = True
+    "config_e_quick", type = str, help = "configuration electro. abgreger of the atome is required", required = False
 )
 atome_update_args.add_argument(
-    "config_e_full", type = str, help = "configuration electro. full of the atome is required", required = True
+    "config_e_full", type = str, help = "configuration electro. full of the atome is required", required = False
 )
 atome_update_args.add_argument(
-    "charges", type = str, help = "Les charges of the atome is required", required = True
+    "charges", type = str, help = "Les charges of the atome is required", required = False
 )
 
 resource_fields = {
@@ -147,35 +147,34 @@ class Atome(Resource):
         if not result:
             abort(404, message = "atome doesnt exist in the db")
         
-        ### VERIFIER si ces elements sont presents dans request
-        if args['name']:
-            result.name = args['name'] 
-        if args['val_e']:
-            result.val_e = args['val_e'] 
-        if args['e_negativity']:
-            result.e_negativity = args['e_negativity']
-        if args['Masse_Molaire']:
-            result.Masse_Molaire = args['Masse_Molaire']
-        if args['config_e_quick']:
-            result.config_e_quick = args['config_e_quick']
-        if args['config_e_full']:
-            result.config_e_fullname = args['config_e_full']
-        if args['charges']:
-            result.charges = args['charges'] 
-        
-        db.session.commit()
+        else:
+            ### VERIFIER si ces elements sont presents dans request
+            if args['name']:
+                result.name = args['name'] 
+            if args['val_e']:
+                result.val_e = args['val_e'] 
+            if args['e_negativity']:
+                result.e_negativity = args['e_negativity']
+            if args['Masse_Molaire']:
+                result.Masse_Molaire = args['Masse_Molaire']
+            if args['config_e_quick']:
+                result.config_e_quick = args['config_e_quick']
+            if args['config_e_full']:
+                result.config_e_full = args['config_e_full']  
+            if args['charges']:
+                result.charges = args['charges'] 
 
+            db.session.commit()
         return result
 
-    
     ###DELETE ELEMENT
     def delete(self, num_protons):
         result = AtomeModel.query.filter_by(id = num_protons).first()
 
         if not result:
-            abort(404, "atome not found")
-
-        result.delete()
+            abort(404, message = "atome not found")
+ 
+        db.session.delete(result) #better than "result.delete()"
         db.session.commit()
 
         return result, "DELETED"
